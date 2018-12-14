@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<watertable>
+    <watertable_present>N</watertable_present>
+    <watertable_method>Constant</watertable_method>
+    <observations>
+      <cd>
+        <date>2000-09-01</date>
+        <depth>2</depth>
+      </cd> 
+    </observations>
+</watertable>

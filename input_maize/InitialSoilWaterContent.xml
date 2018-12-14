@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<InitialSoilWaterContent>
+	<type_of_value>Pct</type_of_value>
+	<method>Depth</method>
+	<number_of_input_points>5</number_of_input_points>
+	<input_data_points>
+	<td>
+		<depth_layer>0.2</depth_layer>
+		<value>21.1</value>
+	</td>
+        <td>
+		<depth_layer>0.4</depth_layer>
+		<value>22.3</value>
+	</td>
+	<td>
+		<depth_layer>0.6</depth_layer>
+		<value>26.6</value>
+	</td>
+	<td>
+		<depth_layer>0.8</depth_layer>
+		<value>25.7</value>
+	</td>
+	<td>
+		<depth_layer>1.0</depth_layer>
+		<value>28.0</value>
+	</td>
+	</input_data_points>
+</InitialSoilWaterContent>

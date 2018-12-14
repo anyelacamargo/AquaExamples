@@ -1,0 +1,70 @@
+<?xml version="1.0"?>
+<IrrigationSchedule>
+  <cd>
+    <day>24</day>
+    <month>05</month>
+    <year>2014</year>
+    <irrigationDepth>20</irrigationDepth>
+  </cd>
+<cd>
+    <day>02</day>
+    <month>06</month>
+    <year>2014</year>
+    <irrigationDepth>20</irrigationDepth>
+  </cd>
+<cd>
+    <day>07</day>
+    <month>06</month>
+    <year>2014</year>
+    <irrigationDepth>20</irrigationDepth>
+  </cd>
+<cd>
+    <day>13</day>
+    <month>06</month>
+    <year>2014</year>
+    <irrigationDepth>20</irrigationDepth>
+  </cd>
+<cd>
+    <day>21</day>
+    <month>06</month>
+    <year>2014</year>
+    <irrigationDepth>20</irrigationDepth>
+  </cd>
+<cd>
+    <day>07</day>
+    <month>07</month>
+    <year>2014</year>
+    <irrigationDepth>20</irrigationDepth>
+  </cd>
+<cd>
+    <day>12</day>
+    <month>07</month>
+    <year>2014</year>
+    <irrigationDepth>20</irrigationDepth>
+  </cd>
+<cd>
+    <day>20</day>
+    <month>07</month>
+    <year>2014</year>
+    <irrigationDepth>20</irrigationDepth>
+  </cd>
+<cd>
+    <day>25</day>
+    <month>07</month>
+    <year>2014</year>
+    <irrigationDepth>20</irrigationDepth>
+  </cd>
+<cd>
+    <day>15</day>
+    <month>08</month>
+    <year>2014</year>
+    <irrigationDepth>20</irrigationDepth>
+  </cd>
+<cd>
+    <day>20</day>
+    <month>08</month>
+    <year>2014</year>
+    <irrigationDepth>20</irrigationDepth>
+  </cd>
+  
+</IrrigationSchedule>

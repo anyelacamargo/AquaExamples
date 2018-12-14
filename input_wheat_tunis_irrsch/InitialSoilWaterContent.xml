@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<InitiaWaterContent>
+	<type_of_value>Num</type_of_value>
+	<method>Layer</method>
+	<number_of_input_points>1</number_of_input_points>
+	<input_data_points>
+	<td>
+		<depth_layer>1</depth_layer>
+		<value>0.12</value>
+	</td>
+	</input_data_points>
+</InitiaWaterContent>

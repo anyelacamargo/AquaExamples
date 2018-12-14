@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<table>
+  <tr>
+    <LayerNo>1</LayerNo>
+    <LayerThickness>4.0</LayerThickness>
+    <thWP>0.10</thWP>
+    <thFC>0.22</thFC>    
+    <thS>0.41</thS>
+    <Ksat>1200.00</Ksat>
+  </tr>
+  <tr>
+    <LayerNo>2</LayerNo>
+    <LayerThickness>0.10</LayerThickness>
+    <thWP>0.10</thWP>
+    <thFC>0.30</thFC>    
+    <thS>0.50</thS>
+    <Ksat>500.00</Ksat>
+  </tr>
+</table>
+

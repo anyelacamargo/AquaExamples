@@ -7,83 +7,9 @@ library(ggplot2)
 library(reshape)
 library(data.table)
 library(dplyr)
+library('AquaCropR')
 
 
-source('../AquaCropR/R/Aqua_library.R')
-source('../AquaCropR/R/ReadFileLocations.R')
-source('../AquaCropR/R/ReadWeatherInputs.R')
-source('../AquaCropR/R/ReadClockParameters.R')
-source('../AquaCropR/R/ReadFieldManagement.R')
-source('../AquaCropR/R/ReadModelParameters.R')
-source('../AquaCropR/R/ReadIrrigationManagement.R')
-source('../AquaCropR/R/ReadGroundwaterTable.R')
-source('../AquaCropR/R/ComputeVariables.R')
-source('../AquaCropR/R/ComputeCropCalendar.R')
-source('../AquaCropR/R/CalculateHILinear.R')
-source('../AquaCropR/R/CalculateHIGC.R')
-source('../AquaCropR/R/ReadModelInitialConditions.R')
-source('../AquaCropR/R/PerformSimulation.R')
-source('../AquaCropR/R/ExtractWeatherData.R')
-source('../AquaCropR/R/Solution.R')
-source('../AquaCropR/R/CheckModelTermination.R')
-source('../AquaCropR/R/GrowingDegreeDay.R')
-source('../AquaCropR/R/CheckGroundwaterTable.R')
-source('../AquaCropR/R/PreIrrigation.R')
-source('../AquaCropR/R/Drainage.R')
-source('../AquaCropR/R/RainfallPartition.R')
-source('../AquaCropR/R/Irrigation.R')
-source('../AquaCropR/R/RootZoneWater.R')
-source('../AquaCropR/R/Infiltration.R')
-source('../AquaCropR/R/CapillaryRise.R')
-source('../AquaCropR/R/Germination.R')
-source('../AquaCropR/R/GrowthStage.R')
-source('../AquaCropR/R/RootDevelopment.R')
-source('../AquaCropR/R/CanopyCover.R')
-source('../AquaCropR/R/WaterStress.R')
-source('../AquaCropR/R/SoilEvaporation.R')
-source('../AquaCropR/R/EvapLayerWaterContent.R')
-source('../AquaCropR/R/Transpiration.R')
-source('../AquaCropR/R/AerationStress.R')
-source('../AquaCropR/R/GroundwaterInflow.R')
-source('../AquaCropR/R/HIrefCurrentDay.R')
-source('../AquaCropR/R/BiomassAccumulation.R')
-source('../AquaCropR/R/TemperatureStress.R')
-source('../AquaCropR/R/HarvestIndex.R')
-source('../AquaCropR/R/CCDevelopment.R')
-source('../AquaCropR/R/AdjustCCx.R')
-source('../AquaCropR/R/CCRequiredTime.R')
-source('../AquaCropR/R/HIadjPreAnthesis.R')
-source('../AquaCropR/R/HIadjPostAnthesis.R')
-source('../AquaCropR/R/UpdateTime.R')
-source('../AquaCropR/R/ResetInitialConditions.R')
-source('../AquaCropR/R/HIadjPollination.R')
-source('../AquaCropR/R/Initialise.R')
-source('../AquaCropR/R/SoilHydraulicProperties.R')
-source('../AquaCropR/R/UpdateCCxCDC.R')
-
-plot_scatter <- function(u, t, folder_name){
-  
-  o =  strsplit(folder_name, '_')[[1]][4]
-  res <- caret::postResample(as.numeric(u$Yield[1:20]),  t[[o]])
-  print(res)
-  plot(t[[o]], type = 'points', ylim = c(0,11), xlab = 'Observations',
-       ylab = 'Yield', pch = 19)
-  points(as.numeric(u$Yield[1:20]), col='red', xlab = 'Observations',
-         ylab = 'Yield', pch = 19)
-  legend("bottomleft", c("GUI", "AquaCropR"), col = 1:2, pch = 19,
-         y.intersp=1, bty='n', title = paste('Test:', o, 'R2: ', round(res[[2]],2), 
-          'RMSE: ',  round(res[[1]],2)), cex = 0.8, xjust=0)
-  #print(u$Yield)
-  
-  #plot(t[[o]], as.numeric(u$Yield[1:20]))
-  
-}
-
-
-
-#library('AquaCropR')
-#
-#
     folder_name <- dir(pattern='input_maize*')
  
     FileLocation = ReadFileLocations(paste(folder_name,'/', 'filesetup.xml', 

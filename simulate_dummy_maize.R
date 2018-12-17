@@ -7,7 +7,7 @@ library(ggplot2)
 library(reshape)
 library(data.table)
 library(dplyr)
-library('AquaCropR')
+library(AquaCropR)
 
 
     folder_name <- dir(pattern='input_maize*')
@@ -29,7 +29,7 @@ library('AquaCropR')
     #break
     d <- list()
     d[['RefBio']] <- 'Biomass (g m-2)'
-    d[['Yield']] <- 'Yield t/ha'
+    d[['Yield']] <- 'Grain Yield t/ha'
     d[['CC']] <- 'Canopy cover (%)'
     d[['Infl']] <- 'Infiltration (mm)'
     d[['Irr']] <- 'Irrigation (mm)'
@@ -46,8 +46,8 @@ library('AquaCropR')
         theme_bw() +  labs(y = d[[cname]], x = 'cum Degree Day (cd)') +
         theme(axis.title.x = element_text(size = 16),
               axis.title.y = element_text(size = 16),
-              axis.text.x = element_text(size = 11.5, angle = 90),
-              axis.text.y = element_text(size = 11.5, angle = 90),
+              axis.text.x = element_text(size = 11.5),
+              axis.text.y = element_text(size = 11.5),
               # legend.text = element_text(size = 12),
               #legend.position="bottom")
               legend.position = "none")

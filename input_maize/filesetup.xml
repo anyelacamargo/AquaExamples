@@ -1,7 +1,7 @@
 <?xml version="1.0"?>
 <FileSetup>
     <Input>input_maize/</Input>
-    <Output>input_maize/output_maize/</Output>
+    <Output>input_maize/output/</Output>
     <WeatherFilename>weather_maize.csv</WeatherFilename>
     <CO2Filename>MaunaLoaCO2.csv</CO2Filename>
     <ClockFilename>Clock.xml</ClockFilename>

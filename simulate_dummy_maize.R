@@ -48,9 +48,9 @@ library(AquaCropR)
               axis.title.y = element_text(size = 16),
               axis.text.x = element_text(size = 11.5),
               axis.text.y = element_text(size = 11.5),
-              # legend.text = element_text(size = 12),
-              #legend.position="bottom")
-              legend.position = "none")
+              legend.text = element_text(size = 12),
+              legend.position="bottom")
+              #legend.position = "none"))
       print(p)
       dev.off() 
    

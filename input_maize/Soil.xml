@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <Soil>
  	<SoilProfileFilename>SoilProfile.xml</SoilProfileFilename>
-    	<SoilTextureFilename>SoilTexture.xml</SoilTextureFilename>
-    	<SoilHydrologyFilename>SoilHydrology.xml</SoilHydrologyFilename>
+  <SoilTextureFilename>SoilTexture.xml</SoilTextureFilename>
+  <SoilHydrologyFilename>SoilHydrology.xml</SoilHydrologyFilename>
 	<CalcSHP>0</CalcSHP>
 	<zSoil>1.9</zSoil>
 	<nComp>12</nComp>
@@ -16,7 +16,7 @@
 	<fwcc>50</fwcc>
 	<AdjREW>0</AdjREW>
 	<REW>9</REW>
-	<AdjCN>1</AdjCN>
+	<AdjCN>0</AdjCN>
 	<CN>61</CN>
 	<zCN>0.3</zCN>
 	<zGerm>0.3</zGerm>

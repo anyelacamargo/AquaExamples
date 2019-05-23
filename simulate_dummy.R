@@ -1,4 +1,3 @@
-
 library(XML)
 library(xml2)
 library(pracma)
@@ -7,78 +6,142 @@ library(ggplot2)
 library(reshape)
 library(data.table)
 library(dplyr)
-library(AquaCropR)
+library(elliptic)
+library(doParallel)
+
+#library(AquaCropR)
 
 
-plot_scatter <- function(u, t, folder_name){
+
+source('../AquaCropR/R/Aqua_library.R')
+source('../AquaCropR/R/ReadFileLocations.R')
+source('../AquaCropR/R/ReadWeatherInputs.R')
+source('../AquaCropR/R/ReadClockParameters.R')
+source('../AquaCropR/R/ReadFieldManagement.R')
+source('../AquaCropR/R/ReadModelParameters.R')
+source('../AquaCropR/R/ReadIrrigationManagement.R')
+source('../AquaCropR/R/ReadGroundwaterTable.R')
+source('../AquaCropR/R/ComputeVariables.R')
+source('../AquaCropR/R/ComputeCropCalendar.R')
+source('../AquaCropR/R/CalculateHILinear.R')
+source('../AquaCropR/R/CalculateHIGC.R')
+source('../AquaCropR/R/ReadModelInitialConditions.R')
+source('../AquaCropR/R/PerformSimulation.R')
+source('../AquaCropR/R/ExtractWeatherData.R')
+source('../AquaCropR/R/Solution.R')
+source('../AquaCropR/R/CheckModelTermination.R')
+source('../AquaCropR/R/GrowingDegreeDay.R')
+source('../AquaCropR/R/CheckGroundwaterTable.R')
+source('../AquaCropR/R/PreIrrigation.R')
+source('../AquaCropR/R/Drainage.R')
+source('../AquaCropR/R/RainfallPartition.R')
+source('../AquaCropR/R/Irrigation.R')
+source('../AquaCropR/R/RootZoneWater.R')
+source('../AquaCropR/R/Infiltration.R')
+source('../AquaCropR/R/CapillaryRise.R')
+source('../AquaCropR/R/Germination.R')
+source('../AquaCropR/R/GrowthStage.R')
+source('../AquaCropR/R/RootDevelopment.R')
+source('../AquaCropR/R/CanopyCover.R')
+source('../AquaCropR/R/WaterStress.R')
+source('../AquaCropR/R/SoilEvaporation.R')
+source('../AquaCropR/R/EvapLayerWaterContent.R')
+source('../AquaCropR/R/Transpiration.R')
+source('../AquaCropR/R/AerationStress.R')
+source('../AquaCropR/R/GroundwaterInflow.R')
+source('../AquaCropR/R/HIrefCurrentDay.R')
+source('../AquaCropR/R/BiomassAccumulation.R')
+source('../AquaCropR/R/TemperatureStress.R')
+source('../AquaCropR/R/HarvestIndex.R')
+source('../AquaCropR/R/CCDevelopment.R')
+source('../AquaCropR/R/AdjustCCx.R')
+source('../AquaCropR/R/CCRequiredTime.R')
+source('../AquaCropR/R/HIadjPreAnthesis.R')
+source('../AquaCropR/R/HIadjPostAnthesis.R')
+source('../AquaCropR/R/UpdateTime.R')
+source('../AquaCropR/R/ResetInitialConditions.R')
+source('../AquaCropR/R/HIadjPollination.R')
+source('../AquaCropR/R/Initialise.R')
+source('../AquaCropR/R/SoilHydraulicProperties.R')
+source('../AquaCropR/R/UpdateCCxCDC.R')
+source('../Aquacropr/R/ComputeNNIndex.R')
+
+
+plot_scatter <- function(u, observed_data, folder_name, label_name, o){
   
   o =  strsplit(folder_name, '_')[[1]][4]
-  res <- caret::postResample(as.numeric(u$Yield[1:20]),  t[[o]])
+  res <- caret::postResample(as.numeric(u$Yield[1:20]),  observed_data[[o]])
   print(res)
-  plot(t[[o]], type = 'points', ylim = c(0,17), cex.axis = 0.8, 
+  plot(observed_data[[o]], type = 'points', ylim = c(0,17), cex.axis = 0.8, 
        xlab = 'Obs years 1982-2002',
-       ylab = 'Grain Yield (t/ha)', pch = 19)
+       ylab = 'Grain Yield (t/ha)', pch = 17, main = o)
   points(as.numeric(u$Yield[1:20]), col='red', cex.axis = 0.8, 
          xlab = 'Observations years 1982-2002',
          ylab = 'Grain Yield (t/ha)', pch = 19)
-  legend("topleft", c("AquaCrop GUI", "AquaCropR"), col = 1:2, pch = 19,
+  legend("topleft", c("AquaCrop GUI", "AquaCropR"), col = 1:2, pch = c(17:19),
          y.intersp=1, bty='n', title = paste('R2: ', 
                                              round(res[[2]],2), 
           'RMSE: ',  round(res[[1]],2)), cex = 0.8, xjust=0)
+  legend("bottomleft", label_name, bty='n')
   
 }
 
 
-folder_names <- dir(pattern='input_wheat*')
+cl <- makeCluster(detectCores() -1)
+registerDoParallel(cl)
 
-for(folder_name in folder_names){
-    FileLocation = ReadFileLocations(paste(folder_name,'/', 'filesetup.xml', sep=''))
-    InitialiseStruct <- Initialise(FileLocation)
-    
-    Outputs <- PerformSimulation(InitialiseStruct)
-    Outputs$PlantingDate <- as.factor(Outputs$PlantingDate)
-    Outputs <- subset(Outputs, PlantingDate != '0000-01-01')
-    Outputs$PlantingDate <- as.factor(Outputs$PlantingDate)
-    Outputs <- setDT(mutate(Outputs, DOY = convertDOY(Outputs$PlantingDate)))
-    Outputs_month <- split(Outputs, by = 'PlantingDate')
-    i = lapply(Outputs_month, function(x) x[as.numeric(which(x$Yield == 
-                                                               max(x$Yield)))][1])
-    u = data.frame(t(data.frame(rbind(sapply(i, function(x) x)))))
-    
-    d <- list()
-    d[['RefBio']] <- 'Biomass (g m-2)'
-    d[['Yield']] <- 'Grain Yield t/ha'
-    d[['CC']] <- 'Canopy cover (%)'
-    d[['Infl']] <- 'Infiltration (mm)'
-    d[['Irr']] <- 'Irrigation (mm)'
-    d[['Et0']] <- 'Et0'
-    
-     for(cname in names(d)){
-       tiff(paste(FileLocation$Output, 'Figure_', cname, '.tiff', sep=''),  
-            width = 800,height = 600, res = 145)
-       p <- ggplot(Outputs, aes(x = TotGDD, y = Outputs[[cname]], 
-                                col = PlantingDate)) +
-         geom_line(aes(linetype=PlantingDate, color=PlantingDate), size = 0.7) + 
-         theme_bw() +  labs(y = d[[cname]], x = 'cum Degree Day (cd)') +
-         theme(axis.title.x = element_text(size = 16),
-               axis.title.y = element_text(size = 16),
-               axis.text.x = element_text(size = 11.5, angle = 90),
-               axis.text.y = element_text(size = 11.5, angle = 90),
-               # legend.text = element_text(size = 12),
-               #legend.position="bottom")
-               legend.position = "none")
-       print(p)
-       dev.off() 
-       
-    }
-   
-}
+folder_names <- dir(pattern='input_wheat_tunis_*')
+
+# foreach(folder_name =  folder_names) %do%{
+#     FileLocation = ReadFileLocations(paste(folder_name,'/', 'filesetup.xml', sep=''))
+#     InitialiseStruct <- Initialise(FileLocation)
+#     
+#     Outputs <- PerformSimulation(InitialiseStruct)
+#     Outputs$PlantingDate <- as.factor(Outputs$PlantingDate)
+#     Outputs <- subset(Outputs, PlantingDate != '0000-01-01')
+#     Outputs$PlantingDate <- as.factor(Outputs$PlantingDate)
+#     Outputs <- setDT(mutate(Outputs, DOY = convertDOY(Outputs$PlantingDate)))
+#     Outputs_month <- split(Outputs, by = 'PlantingDate')
+#     i = lapply(Outputs_month, function(x) x[as.numeric(which(x$Yield == 
+#                                                                max(x$Yield)))][1])
+#     u = data.frame(t(data.frame(rbind(sapply(i, function(x) x)))))
+#     
+#     d <- list()
+#     d[['RefBio']] <- 'Biomass (g m-2)'
+#     d[['Yield']] <- 'Grain Yield t/ha'
+#     d[['CC']] <- 'Canopy cover (%)'
+#     d[['Infl']] <- 'Infiltration (mm)'
+#     d[['Irr']] <- 'Irrigation (mm)'
+#     d[['Et0']] <- 'Et0'
+#     
+#      foreach(cname = names(d)) %do% {
+#        tiff(paste(FileLocation$Output, 'Figure_', cname, '.tiff', sep=''),  
+#             width = 800,height = 600, res = 145)
+#        p <- ggplot(Outputs, aes(x = TotGDD, y = Outputs[[cname]], 
+#                                 col = PlantingDate)) +
+#          geom_line(aes(linetype=PlantingDate, color=PlantingDate), size = 0.7) + 
+#          theme_bw() +  labs(y = d[[cname]], x = 'cum Degree Day (cd)') +
+#          theme(axis.title.x = element_text(size = 16),
+#                axis.title.y = element_text(size = 16),
+#                axis.text.x = element_text(size = 11.5, angle = 90),
+#                axis.text.y = element_text(size = 11.5, angle = 90),
+#                # legend.text = element_text(size = 12),
+#                #legend.position="bottom")
+#                legend.position = "none")
+#        print(p)
+#        dev.off() 
+#        
+#     }
+#    
+# }
 
 
-t <- read.csv('results_AquaCropGUI.csv')
-tiff('Fig1.tiff', width  = 800, height = 800, res=150)
-  par(mfrow = c(2,2), mar=c(4,4,2,2), oma=c(0,0.5,0,2))
-  for(folder_name in folder_names){
+observed_data <- read.csv('results_AquaCropGUI.csv')
+l <- c('A', 'B', 'C', 'D')
+ii = 1
+tiff('Fig2.tiff', width  = 800, height = 800, res=150)
+  par(mfrow = c(2,2), mar=c(4,4,2,0), oma=c(0,1,0,0.5))
+  foreach(folder_name = folder_names) %do% {
     FileLocation = ReadFileLocations(paste(folder_name,'/', 'filesetup.xml', 
                                         sep=''))
     InitialiseStruct <- Initialise(FileLocation)
@@ -91,7 +154,9 @@ tiff('Fig1.tiff', width  = 800, height = 800, res=150)
     i = lapply(Outputs_month, function(x) x[as.numeric(which(x$Yield == 
                                                                max(x$Yield)))][1])
     u = data.frame(t(data.frame(rbind(sapply(i, function(x) x)))))
-    plot_scatter(u, t, folder_name)
-   
-}
+    plot_scatter(u, observed_data, folder_name, l[ii])
+    ii = ii + 1
+  }
 dev.off() 
+
+uu <- u[, c(1:3, 40)]

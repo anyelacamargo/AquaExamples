@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Soil>
+ 	<SoilProfileFilename>SoilProfile.xml</SoilProfileFilename>
+  <SoilTextureFilename>SoilTexture.xml</SoilTextureFilename>
+  <SoilHydrologyFilename>SoilHydrology.xml</SoilHydrologyFilename>
+	<CalcSHP>0</CalcSHP>
+	<zSoil>1.9</zSoil>
+	<nComp>12</nComp>
+	<nLayer>1</nLayer>
+	<EvapZsurf>0.04</EvapZsurf>
+	<EvapZmin>0.15</EvapZmin>
+	<EvapZmax>0.3</EvapZmax>
+	<Kex>1.1</Kex>
+	<fevap>4</fevap>
+	<fWrelExp>0.4</fWrelExp>
+	<fwcc>50</fwcc>
+	<AdjREW>0</AdjREW>
+	<REW>9</REW>
+	<AdjCN>0</AdjCN>
+	<CN>61</CN>
+	<zCN>0.3</zCN>
+	<zGerm>0.3</zGerm>
+	<zRes>-999</zRes>
+	<fshape_cr>16</fshape_cr>
+</Soil>

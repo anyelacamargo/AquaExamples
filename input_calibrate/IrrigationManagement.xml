@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<IrrigationManagement>
+	<IrrSchFilename>IrrigationSchedule.xml</IrrSchFilename>
+	<IrrMethod>1</IrrMethod>
+	<IrrInterval>3</IrrInterval>
+	<SMT1>40</SMT1>
+	<SMT2>40</SMT2>
+	<SMT3>40</SMT3>
+	<SMT4>40</SMT4>
+	<MaxIrr>60</MaxIrr>
+	<AppEff>100</AppEff>
+	<NetIrrSMT>80.5</NetIrrSMT>
+	<WetSurf>100</WetSurf>
+</IrrigationManagement>

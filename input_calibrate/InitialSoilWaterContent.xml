@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<InitialSoilWaterContent>
+	<type_of_value>Prop</type_of_value>
+	<method>Layer</method>
+	<number_of_input_points>1</number_of_input_points>
+	<input_data_points>
+	<td>
+		<depth_layer>1</depth_layer>
+		<value>FC</value>
+	</td>
+	</input_data_points>
+</InitialSoilWaterContent>

@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<table>
+   <tr>
+    <LayerNo>1</LayerNo>
+    <Thickness>0.15</Thickness>
+    <Sand>42</Sand>
+    <Clay>18</Clay>
+    <OrgMat>0.54</OrgMat>
+    <DensityFactor>1</DensityFactor>
+   </tr>
+</table>
+

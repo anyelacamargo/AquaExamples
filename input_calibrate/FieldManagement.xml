@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<FielManagement>
+	<Mulches>1</Mulches>
+	<MulchPctGS>50</MulchPctGS>
+	<MulchPctOS>50</MulchPctOS>
+	<fMulch>0.5</fMulch>
+	<Bunds>0</Bunds>
+	<zBund>0</zBund>
+	<BundWater>0</BundWater>
+</FielManagement>

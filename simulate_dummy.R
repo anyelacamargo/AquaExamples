@@ -36,7 +36,7 @@ plot_scatter <- function(u, observed_data, folder_name, label_name, o){
 cl <- makeCluster(detectCores() -1)
 registerDoParallel(cl)
 
-folder_names <- dir(pattern='input_wheat_tunis_*')
+folder_names <- dir(pattern='input_wheat_tunis_s1')
 
 # foreach(folder_name =  folder_names) %do%{
 #     FileLocation = ReadFileLocations(paste(folder_name,'/', 'filesetup.xml', sep=''))

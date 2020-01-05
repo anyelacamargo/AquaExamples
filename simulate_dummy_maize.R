@@ -31,7 +31,7 @@ plot_scatter <- function(observed_data, predicted_data){
 
 
     
-    folder_name <- dir(pattern='input_maize_usa')
+    folder_name <- dir(pattern='input_maize')
     FileLocation = ReadFileLocations(paste(folder_name,'/', 'filesetup.xml', 
                                            sep=''))
     #break

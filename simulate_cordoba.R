@@ -46,4 +46,8 @@ Outputs <- subset(Outputs, PlantingDate != '0000-01-01')
 Outputs$PlantingDate <- as.factor(Outputs$PlantingDate)
 Outputs <- setDT(mutate(Outputs, DOY = convertDOY(Outputs$PlantingDate)))
 Outputs_month <- split(Outputs, by = 'PlantingDate')
-plot(Outputs$Bio)
+
+#' Plot stuff
+par(mfrow = c(1,2))
+plot(Outputs$Bio, main= 'Cum Biomass', col='green', xlab='days')
+plot(Outputs$Irr, main='Irrigation',  col='blue',  xlab='days')

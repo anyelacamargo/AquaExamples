@@ -39,8 +39,11 @@ print(folder_name)
 
 FileLocation = ReadFileLocations(paste(folder_name,'/', 'filesetup.xml', 
                                         sep=''))
+
 InitialiseStruct <- Initialise(FileLocation)
+#
 Outputs <- PerformSimulation(InitialiseStruct)
+#break
 Outputs$PlantingDate <- as.factor(Outputs$PlantingDate)
 Outputs <- subset(Outputs, PlantingDate != '0000-01-01')
 Outputs$PlantingDate <- as.factor(Outputs$PlantingDate)

@@ -81,11 +81,5 @@ plot_scatter <- function(observed_data, predicted_data){
                                                                max(x$Yield)))][1])
     u = data.frame(t(data.frame(rbind(sapply(i, function(x) x)))))
     
-    od <- read.csv('input_maize_usa/Sample_FinalOutput_v2.csv', header = TRUE)
    
-     i <- which(is.na(od$Yield) == TRUE)
-     
-    tiff('Fig1.tiff', width  = 800, height = 800, res=200)
-    plot_scatter(od$Yield[-i], as.numeric(u$Yield)[c(-i,-34 )])
-    dev.off()
     
